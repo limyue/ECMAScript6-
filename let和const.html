@@ -1,0 +1,127 @@
+  ******************************
+  *   let声明变量（替换var变量） 
+  *   const声明常量（替换var常量）
+  ******************************  
+解决1：内层变量可能会覆盖外层变量
+解决2：用来计数的循环变量泄露为全局变量
+'use strict';
+
+区别一：let声明的变量只在其{代码块}内有效
+       var声明的变量在代码块外部也可以访问到
+        /*
+        if(true){
+          var a = 1;
+          console.log(a);//可以访问到a
+        } 
+        console.log(a);//可以访问到a 
+        */
+        if(true){
+          let a = 1;
+          console.log(a);//可以访问到a
+        } 
+          console.log(a);//报错-a未定义  
+
+区别二：let声明的变量，不存在变量的提升（变量在声明语句之后才能使用）
+        var声明变量会有奇怪的现象，存在变量的提升
+        /*
+        //之前未声明a
+        console.log(a);  //undefined
+        var a = 2;
+        */
+        //之前未声明a
+        console.log(a);  //报错-a is not defined
+        let a = 2;
+区别三：暂时性死区
+   区块中存在let和const命令，这个区块对这些命令声明的变量，
+   从一开始就形成了封闭作用域。
+   凡是在声明之前就使用这些变量，就会报错。
+      /*
+      var b = 4;
+      if(true){
+        let a = 1;
+        console.log(a);
+        console.log(b);
+        //let b;     //let声明后，console.log(b)报错-b未定义
+      }
+      */
+      var x = x;  //不报错
+      let x = x;    //报错 ：x is not defined
+区别四：不允许重复声明
+      /*
+      let a = 1;
+	    let a = 3;//Identifier 'a' has already been declared
+      */
+      function func(arg) {
+        let arg; // 报错
+      }
+      function func(arg) {
+        {
+          let arg; // 不报错
+        }
+      }
+      
+const与var定义常量
+区别一：const定义的常量不再改变，本质是变量指向的那个内存地址不得改动
+       var定义的常量可以改变，不严谨
+区别二：const定义的变量，在块级作用域内有效。
+区别三：onst命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
+区别四：const声明的常量，也与let一样不可重复声明。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
